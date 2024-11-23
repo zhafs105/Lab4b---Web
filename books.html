@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON and jQuery Lab</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #output {
+            margin-top: 20px;
+        }
+        .highlight {
+            color: coral;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Information</h1>
+    <p id="book1-title"></p>
+    <p id="book2-author"></p>
+    <p id="book-genres"></p>
+
+    <div id="output"></div>
+
+    <script>
+        $(document).ready(function () {
+            // Load JSON data from the file (simulated as an inline JSON object for demo)
+            const jsonData = `
+            [
+                {
+                    "title": "The Great Gatsby",
+                    "author": "F. Scott Fitzgerald",
+                    "publicationYear": 1925,
+                    "genres": ["Fiction", "Classics"]
+                },
+                {
+                    "title": "To Kill a Mockingbird",
+                    "author": "Harper Lee",
+                    "publicationYear": 1960,
+                    "genres": ["Fiction", "Coming-of-Age"]
+                }
+            ]`;
+
+            // Parse the JSON string
+            const books = JSON.parse(jsonData);
+
+            // Update DOM elements dynamically
+            $("#book1-title").html(`<span class="highlight">Title of the first book:</span> ${books[0].title}`);
+            $("#book2-author").html(`<span class="highlight">Author of the second book:</span> ${books[1].author}`);
+
+            // Extract and display genres
+            const genres = books.flatMap(book => book.genres);
+            const uniqueGenres = [...new Set(genres)]; // Remove duplicates
+            $("#book-genres").html(`<span class="highlight">Genres of all books:</span> ${uniqueGenres.join(", ")}`);
+        });
+    </script>
+</body>
+</html>
