@@ -47,15 +47,28 @@
 
             // Parse the JSON string
             const books = JSON.parse(jsonData);
+            console.log("Parsed JSON Data:", books); // Log full JSON data to the console
 
             // Update DOM elements dynamically
-            $("#book1-title").html(`<span class="highlight">Title of the first book:</span> ${books[0].title}`);
-            $("#book2-author").html(`<span class="highlight">Author of the second book:</span> ${books[1].author}`);
+            const firstBookTitle = books[0].title;
+            const secondBookAuthor = books[1].author;
+
+            // Display on webpage
+            $("#book1-title").html(`<span class="highlight">Title of the first book:</span> ${firstBookTitle}`);
+            $("#book2-author").html(`<span class="highlight">Author of the second book:</span> ${secondBookAuthor}`);
+
+            // Log to console
+            console.log("Title of the first book:", firstBookTitle);
+            console.log("Author of the second book:", secondBookAuthor);
 
             // Extract and display genres
             const genres = books.flatMap(book => book.genres);
             const uniqueGenres = [...new Set(genres)]; // Remove duplicates
             $("#book-genres").html(`<span class="highlight">Genres of all books:</span> ${uniqueGenres.join(", ")}`);
+
+            // Log genres to console
+            console.log("All genres (with duplicates):", genres);
+            console.log("Unique genres:", uniqueGenres);
         });
     </script>
 </body>
